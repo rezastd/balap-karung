@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Balap Karung 3D — 17 Agustus Simulator</title>
+<link rel="stylesheet" href="style.css" />
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div id="app">
+  <canvas id="scene"></canvas>
+
+  <!-- HUD -->
+  <div id="hud" class="hidden">
+    <div class="hud-top">
+      <div class="hud-box" id="hud-time">⏱ 0.0s</div>
+      <div class="hud-box" id="hud-dist">0.0 m / 50 m</div>
+      <div class="hud-box" id="hud-pos">P4</div>
+    </div>
+    <div class="hud-bars">
+      <div class="bar-row">
+        <span class="bar-label">Jarak / Distance</span>
+        <div class="bar"><div id="progress-fill"></div><div id="progress-flag">🏁</div></div>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Stamina</span>
+        <div class="bar stamina"><div id="stamina-fill"></div></div>
+      </div>
+    </div>
+    <div id="hint">Gantian tekan ⬅️ ➡️ / A D untuk melompat! • Alternate LEFT-RIGHT to hop! • SPACE = lompat rintangan</div>
+  </div>
+
+  <!-- Start overlay -->
+  <div id="overlay-start" class="overlay">
+    <div class="card">
+      <div class="bunting-emoji">🇮🇩 🏁 🇮🇩</div>
+      <h1>BALAP KARUNG 3D</h1>
+      <p class="subtitle">Simulator Lomba 17 Agustus — Indonesian Sack Race</p>
+      <div class="rules">
+        <p><b>🇮🇩 Cara main:</b> Tekan <kbd>◀</kbd> dan <kbd>▶</kbd> (atau <kbd>A</kbd>/<kbd>D</kbd>) <b>bergantian</b> berirama untuk melompat maju. <kbd>SPACE</kbd> untuk melompati rintangan kardus. Pertama mencapai <b>50 m</b> menang lawan 3 AI!</p>
+        <p class="en"><b>🇬🇧 How to play:</b> Mash <kbd>◀</kbd> and <kbd>▶</kbd> (or <kbd>A</kbd>/<kbd>D</kbd>) <b>alternately</b> in rhythm to hop forward. <kbd>SPACE</kbd> jumps over obstacles. First to <b>50 m</b> beats 3 AI racers!</p>
+        <p class="keys">📷 <kbd>C</kbd> ganti kamera • <kbd>R</kbd> ulangi • <kbd>Enter</kbd> mulai</p>
+      </div>
+      <button id="btn-start" class="btn-big">MULAI / START 🏃</button>
+      <button id="btn-sound" class="btn-small">🔊 Suara: ON</button>
+    </div>
+  </div>
+
+  <!-- Countdown -->
+  <div id="countdown" class="hidden">3</div>
+
+  <!-- Result overlay -->
+  <div id="overlay-result" class="overlay hidden">
+    <div class="card">
+      <h1 id="result-title">MERDEKA! 🎉</h1>
+      <p id="result-sub" class="subtitle"></p>
+      <ol id="result-list"></ol>
+      <p id="result-time" class="en"></p>
+      <button id="btn-restart" class="btn-big">MAIN LAGI / RESTART 🔄</button>
+    </div>
+  </div>
+
+  <!-- Touch controls -->
+  <div id="touch" class="hidden">
+    <button id="t-left" class="tbtn">◀<span>KIRI</span></button>
+    <button id="t-jump" class="tbtn mid">⤒<span>LOMPAT</span></button>
+    <button id="t-right" class="tbtn">▶<span>KANAN</span></button>
+  </div>
+
+  <div id="credit">17 Agustus • Balap Karung 3D • Three.js</div>
+</div>
+<script type="module" src="main.js"></script>
+</body>
+</html>
