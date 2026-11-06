@@ -408,8 +408,14 @@ function launchConfetti(x, z) {
 // ---------- Sound: WebAudio oscillators, no assets ----------
 let AC = null, soundOn = true;
 function ac() {
-  if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)();
-  if (AC.state === 'suspended') AC.resume();
+  try {
+    if (!AC) {
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return null;
+      AC = new Ctx();
+    }
+    if (AC && AC.state === 'suspended') AC.resume();
+  } catch { /* audio unavailable — game must still start */ }
   return AC;
 }
 function tone(f0, f1, dur, type = 'sine', vol = 0.18, delay = 0) {
@@ -582,7 +588,8 @@ function restart() {
   document.getElementById('overlay-result').classList.add('hidden');
   startCountdown();
 }
-document.getElementById('btn-start').addEventListener('click', () => { ac(); startCountdown(); });
+document.getElementById('btn-start').addEventListener('click', () => { try { ac(); } catch {} startCountdown(); });
+window.__booted = true;
 document.getElementById('btn-restart').addEventListener('click', restart);
 document.getElementById('btn-sound').addEventListener('click', (e) => {
   soundOn = !soundOn;
