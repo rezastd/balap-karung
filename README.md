@@ -59,6 +59,26 @@ No build step. Three.js r160 loads from unpkg CDN via import map
 - Sound is 100% WebAudio oscillators (hop boings, countdown, fanfare) —
   no audio assets. Toggle with the 🔊 button.
 
+## Realism pass 2
+
+- **Image-based lighting:** the sky gradient + sun disc + earth bounce are
+  prefiltered with `PMREMGenerator` into `scene.environment`, so dirt,
+  burlap and puddles pick up real sky colour instead of flat ambient.
+- **Procedural normal maps:** a CPU Sobel pass derives tangent-space normal
+  maps from the existing canvas textures — dirt track, lane stripes,
+  grass, burlap sacks, cardboard boxes, bamboo.
+- **Shadows:** 2048 map with `radius` blur + `normalBias`, shadow frustum
+  follows the player down the track (crisp near, no acne).
+- **Atmosphere:** warm near-horizon dust band, sun bloom sprite, animated
+  wind gusts driving flags / bunting / clouds together, circling birds,
+  drifting leaves, soft round dust sprites (was square points).
+- **Camera:** handheld micro-sway layered on the follow cam.
+- **Ambience:** synthesised wind bed, crowd murmur, grass hiss and random
+  cicada chirps (WebAudio, no assets); mute with the 🔊 button.
+- **Anatomy:** hands, collar, drooping coco-palm fronds with coconut
+  clusters, sack-rim grip pose instead of a T-pose.
+
+
 ## Files
 
 - `index.html` — page, HUD, overlays, touch controls, import map
